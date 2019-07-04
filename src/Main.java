@@ -1,3 +1,4 @@
+import java.math.BigDecimal;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -9,13 +10,21 @@ public class Main {
 		sc.useLocale(Locale.ENGLISH);
 		Locale.setDefault(new Locale("en", "US"));
 		
-		Long chavePrivada_Bob, chavePublica_Bob, chavePrivada_Alice, chavePublica_Alice;
+		BigDecimal q = new BigDecimal(353), raizPrimitivaDe_q = new BigDecimal(3);
+		BigDecimal chavePublica_Alice, chavePublica_Bob;
 		
-		Pessoa Bob = new Pessoa();
-		Bob.setChavePrivada(sc.nextLong());
-		Bob.calculoChavePublica();
-		System.out.println(Bob.getChavePublica());
-		System.out.println((Math.pow(3, 97)) % 353);
+		Pessoa alice = new Pessoa(97);
+		Pessoa bob = new Pessoa(233);
+		
+		chavePublica_Alice = alice.calculoChavePublica(q, raizPrimitivaDe_q);
+		chavePublica_Bob = bob.calculoChavePublica(q, raizPrimitivaDe_q);
+		
+		alice.calculoChaveSecretaComum(q, chavePublica_Bob, alice.getChavePrivada());
+		bob.calculoChaveSecretaComum(q, chavePublica_Alice, bob.getChavePrivada());
+		
+		
+
+		
 
 	}
 }

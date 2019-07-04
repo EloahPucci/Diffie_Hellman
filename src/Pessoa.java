@@ -1,53 +1,55 @@
+import java.math.BigDecimal;
 
 public class Pessoa {
-	private Long q = (long) 353;
-	private Long raizPrimitivaDe_q = (long) 3;
-	private Long chavePublica;
-	private Long chavePrivada;
-	private Long chavePublicaRecebida;
+	private BigDecimal chavePublica;
+	private Integer chavePrivada;
+	private BigDecimal chavePublicaRecebida;	
 	
-	public void calculoChavePublica() {
-		this.chavePublica = (long) Math.pow(this.raizPrimitivaDe_q, this.chavePrivada) % q;
-	}
-
-	public Long getQ() {
-		return q;
-	}
-
-	public void setQ(Long q) {
-		this.q = q;
-	}
-
-	public Long getRaizPrimitivaDe_q() {
-		return raizPrimitivaDe_q;
-	}
-
-	public void setRaizPrimitivaDe_q(Long raizPrimitivaDe_q) {
-		this.raizPrimitivaDe_q = raizPrimitivaDe_q;
-	}
-
-	public Long getChavePublica() {
-		return chavePublica;
-	}
-
-	public void setChavePublica(Long chavePublica) {
-		this.chavePublica = chavePublica;
-	}
-
-	public Long getChavePrivada() {
-		return chavePrivada;
-	}
-
-	public void setChavePrivada(Long chavePrivada) {
+	public Pessoa(Integer chavePrivada) {
+		super();
 		this.chavePrivada = chavePrivada;
 	}
 
-	public Long getChavePublicaRecebida() {
+	// Cálculo da chave pública
+	public BigDecimal calculoChavePublica(BigDecimal q, BigDecimal raizPrimitivaDe_q) {
+		return calculoPotencia(raizPrimitivaDe_q, this.chavePrivada).remainder(q);
+	}
+	
+	// Cálculo da chave publica comum
+	public BigDecimal calculoChaveSecretaComum(BigDecimal q, BigDecimal chavePublica, Integer chavePrivada) {
+		return calculoPotencia(chavePublica, chavePrivada).remainder(q);
+	}
+	
+	// Esta função faz cálculo de potência
+	public BigDecimal calculoPotencia(BigDecimal base, Integer expoente) {
+		BigDecimal result = new BigDecimal(0);
+		for(int i = 1; i <= chavePrivada; i++) {
+			result = result.multiply(base);
+		}
+		return result;
+	}
+
+	public BigDecimal getChavePublica() {
+		return chavePublica;
+	}
+
+	public void setChavePublica(BigDecimal chavePublica) {
+		this.chavePublica = chavePublica;
+	}
+
+	public Integer getChavePrivada() {
+		return chavePrivada;
+	}
+
+	public void setChavePrivada(Integer chavePrivada) {
+		this.chavePrivada = chavePrivada;
+	}
+
+	public BigDecimal getChavePublicaRecebida() {
 		return chavePublicaRecebida;
 	}
 
-	public void setChavePublicaRecebida(Long chavePublicaRecebida) {
+	public void setChavePublicaRecebida(BigDecimal chavePublicaRecebida) {
 		this.chavePublicaRecebida = chavePublicaRecebida;
 	}
-
 }
