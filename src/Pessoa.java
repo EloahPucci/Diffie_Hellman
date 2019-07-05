@@ -23,7 +23,7 @@ public class Pessoa {
 	// Esta função faz cálculo de potência
 	public BigDecimal calculoPotencia(BigDecimal base, Integer expoente) {
 		BigDecimal result = new BigDecimal(0);
-		for(int i = 1; i <= chavePrivada; i++) {
+		for(int i = 1; i <= expoente; i++) {
 			result = result.multiply(base);
 		}
 		return result;

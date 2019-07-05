@@ -21,10 +21,5 @@ public class Main {
 		
 		alice.calculoChaveSecretaComum(q, chavePublica_Bob, alice.getChavePrivada());
 		bob.calculoChaveSecretaComum(q, chavePublica_Alice, bob.getChavePrivada());
-		
-		
-
-		
-
 	}
 }
